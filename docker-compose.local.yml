@@ -37,10 +37,10 @@ services:
   redis:
     image: docker.io/redis:6
     container_name: bitpin_local_redis
-    
+
     volumes:
       - bitpin_local_redis_data:/data
-    
+
 
   celeryworker:
     <<: *django
