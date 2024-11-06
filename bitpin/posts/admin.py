@@ -8,7 +8,7 @@ from .models import Rating
 
 @admin.register(Post)
 class PostAdmin(BaseModelAdmin):
-    list_display = ("title", "created_at", "updated_at")
+    list_display = ("title", "user", "created_at", "updated_at")
     search_fields = ["title", "body"]
 
     def has_add_permission(self, request):

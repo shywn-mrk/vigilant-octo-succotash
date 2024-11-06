@@ -4,6 +4,7 @@
 from pathlib import Path
 
 import environ
+from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # bitpin/
@@ -295,6 +296,12 @@ CELERY_TASK_TIME_LIMIT = 5 * 60
 # TODO: set to whatever value is adequate in your circumstances
 CELERY_TASK_SOFT_TIME_LIMIT = 60
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#beat-scheduler
+CELERY_BEAT_SCHEDULE = {
+    "refresh_materialized_view": {
+        "task": "bitpin.posts.tasks.refresh_materialized_view",
+        "schedule": crontab(minute="*/1"),
+    },
+}
 CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#worker-send-task-events
 CELERY_WORKER_SEND_TASK_EVENTS = True
@@ -332,6 +339,8 @@ REST_FRAMEWORK = {
         "anon": "25/day",
         "user": "50/day",
     },
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 30,
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
