@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
         return obj.rating_set.count()
 
     def get_avg_rating(self, obj):
-        return obj.rating_set.aggregate(Avg("score"))["score__avg"]
+        return obj.rating_set.aggregate(Avg("score"))["score__avg"] or 0
 
 
 class RatingSerializer(serializers.ModelSerializer):
