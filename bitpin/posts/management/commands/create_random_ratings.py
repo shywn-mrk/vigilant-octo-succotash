@@ -20,7 +20,7 @@ class Command(BaseCommand):
         if not users or not posts:
             self.stdout.write(
                 self.style.WARNING(
-                    "No users or posts found. Add some users and posts before running this command.",
+                    "No users or posts found. Add some users and posts before running this command.",  # noqa: E501
                 ),
             )
             return
