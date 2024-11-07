@@ -13,8 +13,17 @@ class Migration(migrations.Migration):
         migrations.RunSQL(
             """
             CREATE MATERIALIZED VIEW post_avg_ratings AS
-            SELECT post_id, AVG(score) AS avg_rating
-            FROM posts_rating
+            SELECT 
+                post_id,
+                AVG(score) AS avg_rating
+            FROM (
+                SELECT 
+                    post_id,
+                    score
+                FROM posts_rating
+                WHERE score > (SELECT percentile_cont(0.1) WITHIN GROUP (ORDER BY score) FROM posts_rating)
+                  AND score < (SELECT percentile_cont(0.9) WITHIN GROUP (ORDER BY score) FROM posts_rating)
+            ) AS filtered_ratings
             GROUP BY post_id;
             """,
             reverse_sql="DROP MATERIALIZED VIEW IF EXISTS post_avg_ratings;"

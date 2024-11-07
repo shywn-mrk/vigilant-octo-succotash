@@ -41,7 +41,7 @@ class PostListView(ListCreateAPIView):
                         "avg_rating",
                     )[:1],
                 ),
-                Value(0),
+                Value(0.0),
             ),
         ).order_by("-created_at")
 
