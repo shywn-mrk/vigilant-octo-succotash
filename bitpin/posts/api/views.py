@@ -25,7 +25,7 @@ from .serializers import PostSerializer
 from .serializers import RatingSerializer
 
 
-class PostListView(ListCreateAPIView):
+class PostListCreateView(ListCreateAPIView):
     serializer_class = PostSerializer
     throttle_classes = [UserRateThrottle]
 
