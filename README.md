@@ -9,6 +9,16 @@ Bitpin Task
 
 Moved to [settings](https://cookiecutter-django.readthedocs.io/en/latest/1-getting-started/settings.html).
 
+## Docs
+
+We use Sphinx for documenting the project. It has it's own docker compose. To see it, simply run:
+
+```bash
+docker compose -f docker-compose.docs.yml up -d
+```
+
+Then you can visit [docs page](http://0.0.0.0:9000)
+
 ## Basic Commands
 
 ### Setting Up Your Users

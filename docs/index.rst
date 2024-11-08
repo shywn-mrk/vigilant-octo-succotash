@@ -12,6 +12,7 @@ Welcome to bitpin's documentation!
 
    howto
    users
+   posts
 
 
 
